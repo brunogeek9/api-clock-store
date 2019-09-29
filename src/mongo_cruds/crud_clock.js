@@ -1,6 +1,5 @@
-var mongoose = require('mongoose');
-const Clock = mongoose.model('Clocks');
-// var Clock = require('./models/Clock');
+const mongo = require('mongoose');
+const Clock = mongo.model('Clocks');
 
 module.exports = {
     async index(req, res) {
@@ -11,7 +10,7 @@ module.exports = {
             console.info(error)
             return res.json(error);
         }
-        
+
     },
 
     async show(req, res) {
@@ -20,10 +19,12 @@ module.exports = {
     },
 
     async store(req, res) {
-        const clock = await Clock.create(req.body);
-        return res.json(clock);
-            
-        
+        try {
+            const clock = await Clock.create(req.body);
+            return res.json(clock);
+        } catch (error) {
+            return res.json(error);
+        }
 
     },
 
@@ -43,6 +44,6 @@ module.exports = {
         } catch (error) {
             res.status(500).send(error);
         }
-        
+
     }
 };
