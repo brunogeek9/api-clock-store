@@ -5,7 +5,7 @@ module.exports = {
     async index(req, res) {
         try {
             const clocks = await Clock.find({});
-            return res.json(clocks);
+            return res.status(200).json(clocks);
         } catch (error) {
             console.info(error)
             return res.json(error);

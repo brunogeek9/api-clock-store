@@ -15,4 +15,9 @@ require('./src/models/clock');
 app.use('/',require('./src/routes'));
 
 const PORT = 3000;
+let db = mongo.connection;
+db.on('error',console.error.bind(console,'connection error'));
+db.once('open',function(){
+    console.info('conectado com sucesso !!');
+});
 app.listen(PORT);
