@@ -6,5 +6,6 @@ routes.get('/clocks', crud.index);
 routes.post('/clocks',crud.store);
 routes.get('/clock/:id',crud.show);
 routes.put('/clock',crud.update);
+routes.delete('/clock/:id',crud.destroy);
 
 module.exports = routes;

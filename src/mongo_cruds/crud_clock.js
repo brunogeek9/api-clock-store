@@ -1,11 +1,17 @@
 var mongoose = require('mongoose');
-Clock = mongoose.model('Clocks');
+const Clock = mongoose.model('Clocks');
+// var Clock = require('./models/Clock');
 
 module.exports = {
     async index(req, res) {
-        // const page = req.query.page;
-        const clocks = await Clock.find({});
-        return res.json(clocks);
+        try {
+            const clocks = await Clock.find({});
+            return res.json(clocks);
+        } catch (error) {
+            console.info(error)
+            return res.json(error);
+        }
+        
     },
 
     async show(req, res) {
@@ -16,6 +22,9 @@ module.exports = {
     async store(req, res) {
         const clock = await Clock.create(req.body);
         return res.json(clock);
+            
+        
+
     },
 
     async update(req, res) {
@@ -28,7 +37,12 @@ module.exports = {
     },
 
     async destroy(req, res) {
-        await Clock.findByIdAndRemove(req.params.id);
-        return res.send();
+        try {
+            var result = await Clock.deleteOne({ _id: req.params.id }).exec();
+            res.send(result);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+        
     }
 };

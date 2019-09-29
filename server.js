@@ -1,15 +1,19 @@
-let express = require('express');
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 let app = express();
-app.use(express.json());
-const mongo = require("mongoose");
-const PORT = 3001;
 
-mongo.connect(
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+const PORT = 3001;
+app.listen(PORT,()=>console.info('server running !!'));
+mongoose.connect(
     'mongodb://localhost:27017/clock_store',
-    {useNewUrlParser: true}
+    {useNewUrlParser: true, useUnifiedTopology: true}
 
 );
-require('./models/clock');
-app.use('/',require('./routes'));
+require('./src/models/clock');
+app.use('/',require('./src/routes'));
 
-app.listen(PORT,()=>console.info('server running !!'));
+
