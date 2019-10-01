@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-The `api` uri preceed all API endpoints and the following endpoints are currently available
+The following endpoints are currently available
 * GET `/clocks`
 * POST `/clocks`
 * GET `/clock/:id`
