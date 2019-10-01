@@ -9,6 +9,7 @@ npm install
 ### Compiles and hot-reloads for development
 ```
 npm run dev
+```
 
 The `api` uri preceed all API endpoints and the following endpoints are currently available
 * GET `/clocks`
